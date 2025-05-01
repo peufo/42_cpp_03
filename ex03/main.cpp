@@ -1,13 +1,12 @@
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int main()
 {
-	FragTrap a("ZapTrap-9000");
-	FragTrap b;
-	b = a;
-	//FragTrap c("TR4SH-B0T");
+	DiamondTrap a("CL4P-H0P");
+	
+	a.whoAmI();
+	a.guardGate();
+	a.highFivesGuys();
 
 	return (0);
 }

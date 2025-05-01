@@ -4,7 +4,7 @@ DIR_BUILD		=	./build
 SOURCES			=	ClapTrap.cpp DiamondTrap.cpp FragTrap.cpp ScavTrap.cpp main.cpp 
 SOURCES_NAME	=	$(basename $(SOURCES))
 OBJECTS			=	$(addsuffix .o, $(addprefix $(DIR_BUILD)/, $(SOURCES_NAME)))
-CFLAGS			=	-Wall -Wextra -Werror -std=c++98 -pedantic -g
+CFLAGS			=	-Wall -Wextra -Werror -std=c++98 -pedantic -g  -Wno-shadow=local
 LDINCLUDE		=	-I$(DIR_SRC)
 LDFLAGS			=
 LDLIBS			=

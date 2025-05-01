@@ -61,7 +61,7 @@ static void frame(std::string cornerLeft, std::string section, std::string corne
 	std::cout << cornerLeft;
 	for (int i = 0; i < width; i++)
 	{
-		if (i == 18)
+		if (i == 24)
 			std::cout << section;
 		else
 			std::cout << "─";
@@ -71,12 +71,12 @@ static void frame(std::string cornerLeft, std::string section, std::string corne
 
 std::ostream & ClapTrap::say() const
 {
-	static int width = 54;
+	static int width = 60;
 
 	std::cout << '\n';
 	frame("╭", "┬", "╮", width);
 	std::cout << "│ " << this->icon << " " << this->name;
-	for (int i = this->name.length(); i < 14; i++)
+	for (int i = this->name.length(); i < 20; i++)
 		std::cout << ' ';
 	std::cout << "│";
 	std::cout << std::setw(8) << this->damage << " 🔫 ";
