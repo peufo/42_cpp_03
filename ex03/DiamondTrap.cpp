@@ -27,6 +27,7 @@ DiamondTrap::DiamondTrap(const std::string name): ClapTrap(name + "_clap_name")
 
 DiamondTrap::DiamondTrap(const DiamondTrap & src): ClapTrap(src), FragTrap(src), ScavTrap(src)
 {
+	this->name = src.name;
 	this->say() << "Hola [copy construtor]" << std::endl;
 }
 
@@ -34,6 +35,7 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& src)
 {
 	if (this == &src)
 		return *this;
+	this->name = src.name;
 	this->copyFrom(src);
 	this->say() << "Hola [assignement construtor]" << std::endl;
 	return *this;
