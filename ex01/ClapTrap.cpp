@@ -1,38 +1,39 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : health(10), energy(10), damage(0)
+ClapTrap::~ClapTrap()
+{
+	this->say() << "I'm destroyed !" << std::endl;
+}
+
+ClapTrap::ClapTrap() : icon("🤡"), health(10), energy(10), damage(0)
 {
 	this->name = "Unknown";
 	this->say() << "Hi! I was born without name." << std::endl;
 }
 
-ClapTrap::ClapTrap(const std::string name): health(10), energy(10), damage(0)
+ClapTrap::ClapTrap(const std::string name): icon("🤡"), health(10), energy(10), damage(0)
 {
 	this->name = name;
 	this->say() << "Hi! I was born and named me " << name << "." << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap & clapTrap): health(10), energy(10), damage(0)
+ClapTrap::ClapTrap(const ClapTrap & clapTrap)
 {
-	this->name = clapTrap.name;
-	this->say() << "Hi! I was born and i take the same name of a bro." << std::endl;
+	*this = clapTrap;
+	this->say() << "I was born from a copy constructor, but i use assignement operator logic :)" << std::endl;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& clapTrap)
 {
 	if (this == &clapTrap)
 		return *this;
+	this->icon = "🤡";
 	this->name = clapTrap.name;
 	this->health = clapTrap.health;
 	this->energy = clapTrap.energy;
 	this->damage = clapTrap.damage;
 	this->say() << "Hi! I was born and i take the same name and states of a bro." << std::endl;
 	return *this;
-}
-
-ClapTrap::~ClapTrap()
-{
-	this->say() << "I'm destroyed !" << std::endl;
 }
 
 std::string ClapTrap::getName() const
@@ -55,7 +56,7 @@ static void frame(std::string cornerLeft, std::string section, std::string corne
 	std::cout << cornerLeft;
 	for (int i = 0; i < width; i++)
 	{
-		if (i == 16)
+		if (i == 18)
 			std::cout << section;
 		else
 			std::cout << "─";
@@ -65,11 +66,11 @@ static void frame(std::string cornerLeft, std::string section, std::string corne
 
 std::ostream & ClapTrap::say() const
 {
-	static int width = 52;
+	static int width = 54;
 
 	std::cout << '\n';
 	frame("╭", "┬", "╮", width);
-	std::cout << "│  " << this->name;
+	std::cout << "│ " << this->icon << " " << this->name;
 	for (int i = this->name.length(); i < 14; i++)
 		std::cout << ' ';
 	std::cout << "│";
@@ -119,6 +120,8 @@ void ClapTrap::takeDamage(unsigned int amount)
 		this->say() << "I'm already dead bro ! Don't you have any respect ?" << std::endl;
 		return ;
 	}
+	if (amount > (unsigned int)this->health)
+		amount = this->health;
 	this->health -= amount;
 	this->say() << "Ouch, that hurts! My health goes from " << this->health + amount << " to " << this->health << std::endl;
 }
