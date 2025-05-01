@@ -25,17 +25,18 @@ ScavTrap::ScavTrap(const std::string name): ClapTrap(name)
 	this->say() << "Hey ciao! I'm now a ScavTrap [construtor(name)]" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap & scavTrap): ClapTrap(scavTrap)
+ScavTrap::ScavTrap(const ScavTrap& src): ClapTrap(src)
 {
+	this->isGateKeeper = src.isGateKeeper;
 	this->say() << "Hey ciao! I'm now a ScavTrap [copy construtor]" << std::endl;
 }
 
-ScavTrap& ScavTrap::operator=(const ScavTrap& scavTrap)
+ScavTrap& ScavTrap::operator=(const ScavTrap& src)
 {
-	if (this == &scavTrap)
+	if (this == &src)
 		return *this;
-	this->icon = "🤖";
-	this->isGateKeeper = scavTrap.isGateKeeper;
+	this->isGateKeeper = src.isGateKeeper;
+	this->copyFrom(src);
 	this->say() << "Hey ciao! I'm now a ScavTrap [assignement construtor]" << std::endl;
 	return *this;
 }

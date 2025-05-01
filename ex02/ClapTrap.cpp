@@ -17,22 +17,27 @@ ClapTrap::ClapTrap(const std::string name): icon("🤡"), health(10), energy(10)
 	this->say() << "Hi! I was born and named me " << name << "." << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap & clapTrap)
+void ClapTrap::copyFrom(const ClapTrap& src)
 {
-	*this = clapTrap;
-	this->say() << "I was born from a copy constructor, but i use assignement operator logic :)" << std::endl;
+	this->icon = src.icon;
+	this->name = src.name;
+	this->health = src.health;
+	this->energy = src.energy;
+	this->damage = src.damage;
 }
 
-ClapTrap& ClapTrap::operator=(const ClapTrap& clapTrap)
+ClapTrap::ClapTrap(const ClapTrap & src)
 {
-	if (this == &clapTrap)
+	this->copyFrom(src);
+	this->say() << "I was born from a copy constructor" << std::endl;
+}
+
+ClapTrap& ClapTrap::operator=(const ClapTrap& src)
+{
+	if (this == &src)
 		return *this;
-	this->icon = "🤡";
-	this->name = clapTrap.name;
-	this->health = clapTrap.health;
-	this->energy = clapTrap.energy;
-	this->damage = clapTrap.damage;
-	this->say() << "Hi! I was born and i take the same name and states of a bro." << std::endl;
+	this->copyFrom(src);
+	this->say() << "Hi! I was born from an assignement." << std::endl;
 	return *this;
 }
 

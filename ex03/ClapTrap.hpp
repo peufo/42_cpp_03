@@ -16,11 +16,11 @@ class ClapTrap
 		bool		useEnergy();
 		void		copyFrom(const ClapTrap& src);
 	public:
+		~ClapTrap();
 		ClapTrap();
 		ClapTrap(const std::string name);
-		ClapTrap(const ClapTrap& clapTrap);
-		ClapTrap& operator=(const ClapTrap& clapTrap);
-		~ClapTrap();
+		ClapTrap(const ClapTrap& src);
+		ClapTrap& operator=(const ClapTrap& src);
 		std::string getName() const;
 		int		getDamage() const;
 		void	setDamage(int damage);

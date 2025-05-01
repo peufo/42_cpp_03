@@ -14,6 +14,7 @@ class ClapTrap
 		int			energy;
 		int			damage;
 		bool		useEnergy();
+		void		copyFrom(const ClapTrap& src);
 	public:
 		ClapTrap();
 		ClapTrap(const std::string name);

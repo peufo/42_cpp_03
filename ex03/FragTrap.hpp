@@ -3,17 +3,17 @@
 
 #include "ClapTrap.hpp"
 
-class FragTrap: public ClapTrap
+class FragTrap: virtual public ClapTrap
 {
-	private:
+	protected:
 		static const int defaultHealth = 100;
 		static const int defaultEnergy = 100;
 		static const int defaultDamage = 30;
 	public:
 		~FragTrap();
 		FragTrap();
-		FragTrap(const FragTrap& src);
 		FragTrap(const std::string name);
+		FragTrap(const FragTrap& src);
 		FragTrap& operator=(const FragTrap& src);
 		void highFivesGuys(void);
 };
