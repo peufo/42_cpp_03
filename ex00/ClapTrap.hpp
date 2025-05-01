@@ -2,70 +2,30 @@
 #define CLAPTRAP_HPP
 
 #include <iostream>
+#include <iomanip>
 #include <string>
 
 class ClapTrap
 {
 private:
     std::string name;
-    int         hit;
+    int         health;
     int         energy;
     int         damage;
     bool        useEnergy();
+    std::ostream& say() const;
 public:
     ClapTrap();
-    ClapTrap(std::string name);
-    // Copy constructor
-    ClapTrap(Clas);
-    ClapTrap& operator=();
+    ClapTrap(const std::string name);
+    ClapTrap(const ClapTrap& clapTrap);
+    ClapTrap& operator=(const ClapTrap& clapTrap);
     ~ClapTrap();
+    std::string getName() const;
+    int getDamage() const;
+    void setDamage(int damage);
     void attack(const std::string& target);
     void beRepaired(unsigned int amount);
     void takeDamage(unsigned int amount);
 };
-
-ClapTrap::ClapTrap() : hit(10), energy(10), damage(0)
-{
-    std::cout << "ClapTrap contructor called !" << std::endl;
-    this->name = "default name";
-}
-
-ClapTrap::ClapTrap(std::string name): hit(10), energy(10), damage(0)
-{
-    std::cout << "ClapTrap contructor called !" << std::endl;
-    this->name = name;
-}
-
-ClapTrap::~ClapTrap()
-{
-    std::cout << "ClapTrap destructor called !" << std::endl;
-}
-
-bool ClapTrap::useEnergy()
-{
-    if (this->energy <= 0)
-    {
-        std::cout << "No energy to use !" << std::endl;
-        return false;
-    }
-    this->energy--;
-    return (true);
-}
-
-void ClapTrap::attack(const std::string &target)
-{
-    if (!this->useEnergy())
-        return ;
-}
-
-void ClapTrap::beRepaired(unsigned int amount)
-{
-    if (!this->useEnergy())
-        return ;
-}
-
-void ClapTrap::takeDamage(unsigned int amount)
-{
-}
 
 #endif
