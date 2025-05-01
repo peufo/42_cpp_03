@@ -50,10 +50,35 @@ void ClapTrap::setDamage(int damage)
 	this->damage = damage;
 }
 
+static void frame(std::string cornerLeft, std::string section, std::string cornerRight, int width)
+{
+	std::cout << cornerLeft;
+	for (int i = 0; i < width; i++)
+	{
+		if (i == 16)
+			std::cout << section;
+		else
+			std::cout << "─";
+	}
+	std::cout << cornerRight << '\n';
+}
+
 std::ostream & ClapTrap::say() const
 {
-	std::cout << std::setiosflags(std::ios::left);
-	return (std::cout << "│" << std::setw(14) << this->name << std::setw(0) << "├ ");
+	static int width = 52;
+
+	std::cout << '\n';
+	frame("╭", "┬", "╮", width);
+	std::cout << "│" << this->name;
+	for (int i = this->name.length(); i < 16; i++)
+		std::cout << ' ';
+	std::cout << "│";
+	std::cout << std::setw(8) << this->health << " ❤️ ";
+	std::cout << std::setw(8) << this->energy << " ⚡️ ";
+	std::cout << std::setw(8) << this->damage << " 🔫 ";
+	std::cout << "│\n" << std::setw(0);
+	frame("├", "┴", "╯", width);
+	return (std::cout << "╰─ ");
 }
 
 bool ClapTrap::useEnergy()
@@ -83,8 +108,8 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (!this->useEnergy())
 		return ;
-	this->say() << "Repairs myself. My health goes from " << this->health << " to " << this->health + amount << std::endl;
 	this->health += amount;
+	this->say() << "Repairs myself. My health goes from " << this->health - amount << " to " << this->health << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
@@ -94,6 +119,6 @@ void ClapTrap::takeDamage(unsigned int amount)
 		this->say() << "I'm already dead bro ! Don't you have any respect ?" << std::endl;
 		return ;
 	}
-	this->say() << "Ouch, that hurts! My health goes from " << this->health << " to " << this->health - amount << std::endl;
 	this->health -= amount;
+	this->say() << "Ouch, that hurts! My health goes from " << this->health + amount << " to " << this->health << std::endl;
 }

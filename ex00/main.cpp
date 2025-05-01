@@ -10,13 +10,10 @@ int main()
 
     a.setDamage(1);
     b.setDamage(2);
-    for (int i = 0; i < 12; i++)
-    {
-        a.attack(b.getName());
-        b.takeDamage(a.getDamage());
-        b.attack(c.getName());
-        c.takeDamage(b.getDamage());
-        d.beRepaired(1);
-    }
+    a.attack(b.getName());
+    b.takeDamage(a.getDamage());
+    b.attack(c.getName());
+    c.takeDamage(b.getDamage());
+    d.beRepaired(1);
     return (0);
 }
