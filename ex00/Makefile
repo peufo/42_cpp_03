@@ -19,7 +19,7 @@ $(DIR_BUILD)/%.o: $(DIR_SRC)/%.cpp
 	@$(CXX) $(CFLAGS) $(LDINCLUDE) -c $^ -o $@
 
 clean:
-	$(RM) -r $(DIR_BUILD)
+	$(RM) -rf $(DIR_BUILD)
 
 fclean: clean
 	$(RM) $(NAME)
